@@ -1,9 +1,7 @@
 #CLI Controller
 class VistaCompanies::CLI
   def call
-    puts "Welcome to the private equity fund portfolio company scraper."
-    puts "This program allows users to navigate Vista Equity Partners' current and former investments."
-    puts "You can navigate the program in the following ways:"
+    greeting 
     list
     input = nil
     while input != "exit"
@@ -11,7 +9,7 @@ class VistaCompanies::CLI
     input = gets.strip.downcase
       case input
         when "1"
-          puts "All current portfolio companies alphabetically."
+          puts "All current portfolio companies alphabetically." #data goes here
         when "2"
           puts "All former portfolio companies alphabetically."
         when "3"
@@ -27,6 +25,12 @@ class VistaCompanies::CLI
         end
       end
   end
+
+  def greeting
+    puts "Welcome to the private equity fund portfolio company scraper."
+    puts "This program allows users to navigate Vista Equity Partners' current and former investments."
+    puts "You can navigate the program in the following ways:"
+  end 
 
   def list
     puts "1. Enter '1' to list all current portfolio companies alphabetically."
