@@ -20,14 +20,23 @@ class VistaCompanies::CLI
           puts "All industry classifications"
         when "list"
           list
+        when "exit"
+          goodbye
+        else
+          puts "Invalid entry. Type 'list' to repeat the list of options or type 'exit' to leave the program."
+        end
       end
-    end
   end
+
   def list
     puts "1. Enter '1' to list all current portfolio companies alphabetically."
     puts "2. Enter '2' to list all former portfolio companies alphabetically."
     puts "3. Enter '3' to list all portfolio companies alphabetically (whether current or former)."
     puts "4. Enter '4' to select companies by industry classification."
+  end
+
+  def goodbye
+    puts "Goodbye."
   end
 
 end
