@@ -1,6 +1,2 @@
-require "vista_companies/version"
-
-module VistaCompanies
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./vista_companies/version"
+require_relative "./vista_companies/cli.rb"

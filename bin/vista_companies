@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require './lib/vista_companies'
 
-VistaCompanies::CLI.new.call 
+VistaCompanies::CLI.new.call
