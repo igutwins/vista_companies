@@ -4,6 +4,26 @@ class VistaCompanies::CLI
     puts "Welcome to the private equity fund portfolio company scraper."
     puts "This program allows users to navigate Vista Equity Partners' current and former investments."
     puts "You can navigate the program in the following ways:"
+    list
+    input = nil
+    while input != "exit"
+      puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
+    input = gets.strip.downcase
+      case input
+        when "1"
+          puts "All current portfolio companies alphabetically."
+        when "2"
+          puts "All former portfolio companies alphabetically."
+        when "3"
+          puts "All portfolio companies alphabetically."
+        when "4"
+          puts "All industry classifications"
+        when "list"
+          list
+      end
+    end
+  end
+  def list
     puts "1. Enter '1' to list all current portfolio companies alphabetically."
     puts "2. Enter '2' to list all former portfolio companies alphabetically."
     puts "3. Enter '3' to list all portfolio companies alphabetically (whether current or former)."
