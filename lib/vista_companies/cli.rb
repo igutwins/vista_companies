@@ -44,6 +44,17 @@ class VistaCompanies::CLI
     puts "Goodbye."
   end
 
+  def make_companies
+    companies_array = Scraper.scrape_all_companies(BASE_PATH)
+    PortCo.create_from_all_companies_page(companies_array)
+  end
+
+  def add_company_attributes
+    PortCo.all.each do |company|
+      attributes = Scraper.scrape_company_page(company.link_detail)
+      company.add_company_attributes(attributes)
+  end
+
 end
 
 #Welcome user. Explain the program.
