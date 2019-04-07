@@ -1,7 +1,8 @@
 #CLI Controller
 class VistaCompanies::CLI
+  BASE_PATH = "https://www.vistaequitypartners.com/companies/"
   def call
-    greeting 
+    greeting
     list
     input = nil
     while input != "exit"
@@ -30,7 +31,7 @@ class VistaCompanies::CLI
     puts "Welcome to the private equity fund portfolio company scraper."
     puts "This program allows users to navigate Vista Equity Partners' current and former investments."
     puts "You can navigate the program in the following ways:"
-  end 
+  end
 
   def list
     puts "1. Enter '1' to list all current portfolio companies alphabetically."

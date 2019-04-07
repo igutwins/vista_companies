@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 require './lib/vista_companies'
+require 'nokogiri'
+require 'colorize'
 
 VistaCompanies::CLI.new.call
