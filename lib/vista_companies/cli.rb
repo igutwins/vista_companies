@@ -1,4 +1,6 @@
 #CLI Controller
+require 'pry'
+
 class VistaCompanies::CLI
   BASE_PATH = "https://www.vistaequitypartners.com/companies/"
   def call
@@ -14,6 +16,9 @@ class VistaCompanies::CLI
         when "2"
           puts "All former portfolio companies alphabetically."
         when "3"
+          make_companies
+          add_company_attributes
+          display_all_companies
           puts "All portfolio companies alphabetically."
         when "4"
           puts "All industry classifications"
@@ -25,7 +30,7 @@ class VistaCompanies::CLI
           puts "Invalid entry. Type 'list' to repeat the list of options or type 'exit' to leave the program."
         end
       end
-  end
+    end
 
   def greeting
     puts "Welcome to the private equity fund portfolio company scraper."
@@ -45,22 +50,24 @@ class VistaCompanies::CLI
   end
 
   def make_companies
-    companies_array = Scraper.scrape_all_companies(BASE_PATH)
+    companies_array = Scraper.scrape_all_companies('https://www.vistaequitypartners.com/companies')
     PortCo.create_from_all_companies_page(companies_array)
+    binding.pry
   end
 
   def add_company_attributes
     PortCo.all.each do |company|
       attributes = Scraper.scrape_company_page(company.link_detail)
       company.add_company_attributes(attributes)
+    end
   end
 
   def display_all_companies
     PortCo.all.each do |company|
       puts "#{company.company_name.upcase}".colorize(:blue)
       puts "  year of investment:".colorize(:light_blue) + " #{company.year_of_investment}"
-      puts "  portfolio status".colorize(:light_blue) + " #{company.portfolio_status}"
-      puts "  headquarters".colorize(:light_blue) + " #{company.headquarters}"
+      puts "  portfolio status:".colorize(:light_blue) + " #{company.portfolio_status}"
+      puts "  headquarters:".colorize(:light_blue) + " #{company.headquarters}"
       puts "  website:".colorize(:light_blue) + " #{company.company_site}"
       puts "  description:".colorize(:light_blue) + " #{company.brief_desc}"
       puts "----------------------".colorize(:green)

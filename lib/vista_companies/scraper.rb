@@ -1,4 +1,7 @@
 require 'open-uri'
+require 'openssl'
+require 'nokogiri'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 class Scraper
 
@@ -9,7 +12,6 @@ class Scraper
         company_site = company.attr('href').value
         company_name = company.attr('alt').text
         companies << {link_detail: company_site, company_name: company_name}
-      end
     end
   end
 
