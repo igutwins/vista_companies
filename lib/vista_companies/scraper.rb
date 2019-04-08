@@ -10,7 +10,7 @@ class Scraper
     companies = []
     company_listing.css("div.all-companies.grid3").each do |company|
       company.css(".grid-item").each do |card|
-      company_site = card.attribute("href").value
+      company_site = card.attribute("href")
       company_name = card.css("div.table-cell img").attribute('alt').text.gsub(" Logo","")
       companies << {link_detail: company_site, company_name: company_name}
       end
@@ -24,8 +24,8 @@ class Scraper
     company[:year_of_investment] = company_page.css("div.details").text.split("\n")[4].strip
     company[:portfolio_status] = company_page.css("div.details").text.split("\n")[6].strip
     company[:headquarters] = company_page.css("div.details").text.split("\n")[11].strip
-    company[:company_site] = company_page.css("div.details a").attribute('href').value
-    company[:brief_desc] = company_page.css("div.comp-content.inline-block p strong").text
+    company[:company_site] = company_page.css("div.details a").attribute('href')
+    company[:brief_desc] = company_page.css("div.comp-content.inline-block p")[0].text
     company[:detail_desc] = company_page.css("div.comp-content.inline-block p").slice(1,100).text
     company
   end
