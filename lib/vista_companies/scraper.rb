@@ -2,12 +2,13 @@ require 'open-uri'
 
 class Scraper
 
-  def self.scrape_all_companies(index_url) #https://www.vistaequitypartners.com/companies/
+  def self.scrape_all_companies(index_url)
     company_listing = Nokogiri::HTML(open(index_url))
     companies = []
     company_listing.css("div.all-companies grid3").each do |company|
-      company.css("a.grid-item").each do |link|
-        company_site = "#{link.attr('href')}"
+        company_site = company.attr('href').value
+        company_name = company.attr('alt').text
+        companies << {link_detail: company_site}
       end
     end
   end
