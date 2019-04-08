@@ -7,27 +7,24 @@ class Scraper
 
   def self.scrape_all_companies(index_url)
     company_listing = Nokogiri::HTML(open(index_url))
-    @companies = []
-    company_listing.css("div.all-companies grid3").each do |company|
-      company.css("div.table-cell")
-        company_site = "testurl"#company.css("div.table-cell img").attribute("src").value
-        company_name = "testname"#company.attr('alt').text
-        @companies << {link_detail: company_site, company_name: company_name}
+    companies = []
+    company_listing.css("div.all-companies.grid3").each do |company|
+      company_site = company.css("a").attribute("href").value
+      company_name = company.css("div.table-cell img").attribute('alt').text.gsub(" Logo","")
+      companies << {link_detail: company_site, company_name: company_name}
     end
-    @companies
-    binding.pry
+    companies
   end
 
   def self.scrape_company_page(company_slug)
     company = {}
     company_page = Nokogiri::HTML(open(company_slug))
-    details = company_page.css("div.details")
-    company[:year_of_investment] = details[2].text
-    company[:portfolio_status] = details[4].text
-    company[:headquarters] = details[6].text
-    company[:company_site] = company_page.css("div.details a").attr('href')
+    company[:year_of_investment] = company_page.css("div.details").text.split("\n")[4].strip
+    company[:portfolio_status] = company_page.css("div.details").text.split("\n")[6].strip
+    company[:headquarters] = company_page.css("div.details").text.split("\n")[11].strip
+    company[:company_site] = company_page.css("div.details a").attribute('href').value
     company[:brief_desc] = company_page.css("div.comp-content.inline-block p strong").text
-    company[:detail_desc] = company_page.css("div.comp-content.inline-block p").text
+    company[:detail_desc] = company_page.css("div.comp-content.inline-block p").slice(1,100).text
     company
   end
 
