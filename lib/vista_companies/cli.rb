@@ -61,7 +61,7 @@ class VistaCompanies::CLI
 
   def display_all_companies
     PortCo.all.each do |company|
-      puts "#{company.company_name.upcase}".colorize(:blue)
+      puts "#{company.company_name.upcase}".colorize(:red)
       puts "  Year of Investment:".colorize(:light_blue) + " #{company.year_of_investment}"
       puts "  Portfolio Status:".colorize(:light_blue) + " #{company.portfolio_status}"
       puts "  Headquarters:".colorize(:light_blue) + " #{company.headquarters}"
