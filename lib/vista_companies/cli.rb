@@ -1,8 +1,6 @@
 #CLI Controller
 require 'pry'
-
 class VistaCompanies::CLI
-  BASE_PATH = "https://www.vistaequitypartners.com/companies/"
   def call
     greeting
     list

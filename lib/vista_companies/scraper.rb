@@ -9,11 +9,14 @@ class Scraper
     company_listing = Nokogiri::HTML(open(index_url))
     companies = []
     company_listing.css("div.all-companies.grid3").each do |company|
-      company_site = company.css("a").attribute("href").value
-      company_name = company.css("div.table-cell img").attribute('alt').text.gsub(" Logo","")
+      company.css(".grid-item").each do |card|
+      company_site = card.attribute("href").value
+      company_name = card.css("div.table-cell img").attribute('alt').text.gsub(" Logo","")
       companies << {link_detail: company_site, company_name: company_name}
+      end
     end
     companies
+    binding.pry
   end
 
   def self.scrape_company_page(company_slug)
