@@ -7,12 +7,15 @@ class Scraper
 
   def self.scrape_all_companies(index_url)
     company_listing = Nokogiri::HTML(open(index_url))
-    companies = []
+    @companies = []
     company_listing.css("div.all-companies grid3").each do |company|
-        company_site = company.attr('href').value
-        company_name = company.attr('alt').text
-        companies << {link_detail: company_site, company_name: company_name}
+      company.css("div.table-cell")
+        company_site = "testurl"#company.css("div.table-cell img").attribute("src").value
+        company_name = "testname"#company.attr('alt').text
+        @companies << {link_detail: company_site, company_name: company_name}
     end
+    @companies
+    binding.pry
   end
 
   def self.scrape_company_page(company_slug)
@@ -27,6 +30,5 @@ class Scraper
     company[:detail_desc] = company_page.css("div.comp-content.inline-block p").text
     company
   end
-
 
 end

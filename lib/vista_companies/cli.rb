@@ -52,7 +52,6 @@ class VistaCompanies::CLI
   def make_companies
     companies_array = Scraper.scrape_all_companies('https://www.vistaequitypartners.com/companies')
     PortCo.create_from_all_companies_page(companies_array)
-    binding.pry
   end
 
   def add_company_attributes
