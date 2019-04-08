@@ -10,7 +10,7 @@ class VistaCompanies::CLI
     input = gets.strip.downcase
       case input
         when "1"
-          puts "All current portfolio companies alphabetically." #data goes here
+          puts "All current portfolio companies alphabetically."
         when "2"
           puts "All former portfolio companies alphabetically."
         when "3"
@@ -53,6 +53,18 @@ class VistaCompanies::CLI
     PortCo.all.each do |company|
       attributes = Scraper.scrape_company_page(company.link_detail)
       company.add_company_attributes(attributes)
+  end
+
+  def display_all_companies
+    PortCo.all.each do |company|
+      puts "#{company.company_name.upcase}".colorize(:blue)
+      puts "  year of investment:".colorize(:light_blue) + " #{company.year_of_investment}"
+      puts "  portfolio status".colorize(:light_blue) + " #{company.portfolio_status}"
+      puts "  headquarters".colorize(:light_blue) + " #{company.headquarters}"
+      puts "  website:".colorize(:light_blue) + " #{company.company_site}"
+      puts "  description:".colorize(:light_blue) + " #{company.brief_desc}"
+      puts "----------------------".colorize(:green)
+    end
   end
 
 end
