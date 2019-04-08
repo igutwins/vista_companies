@@ -16,7 +16,6 @@ class Scraper
       end
     end
     companies
-    binding.pry
   end
 
   def self.scrape_company_page(company_slug)
