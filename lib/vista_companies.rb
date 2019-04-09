@@ -5,4 +5,4 @@ require_relative "./vista_companies/scraper.rb"
 require 'pry'
 require 'openssl'
 require 'nokogiri'
-#test if working
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
