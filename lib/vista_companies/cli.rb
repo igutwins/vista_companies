@@ -9,7 +9,9 @@ class VistaCompanies::CLI
     input = gets.strip.downcase
       case input
         when "1"
-          puts "All current portfolio companies alphabetically."
+          make_companies
+          add_company_attributes
+          display_all_current
         when "2"
           puts "All former portfolio companies alphabetically."
         when "3"
@@ -67,6 +69,14 @@ class VistaCompanies::CLI
       puts "  Website:".colorize(:light_blue) + " #{company.company_site}"
       puts "  Description:".colorize(:light_blue) + " #{company.brief_desc}"
       puts "----------------------".colorize(:green)
+    end
+  end
+
+  def display_all_current
+    all_current = PortCo.all.collect {|company| company.portfolio_status == "Current"}
+    sorted = all_current.sort
+    sorted.each_with_index do |company, index|
+      puts "##{index}. #{company.company_name.upcase}".colorize(:red)
     end
   end
 
