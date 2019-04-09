@@ -1,5 +1,4 @@
 #CLI Controller
-require 'pry'
 class VistaCompanies::CLI
   def call
     greeting
