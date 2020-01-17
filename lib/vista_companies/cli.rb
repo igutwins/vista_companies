@@ -10,15 +10,22 @@ class VistaCompanies::CLI
       puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
     input = gets.strip.downcase
       case input
-        when "1"
+      when "1" #lists current
           display_all_current
           input_prompt
-        when "2"
+          when "2" #lists former
           display_all_former
           input_prompt
-        when "3"
+        when "3" #lists all
           display_all_comps
           input_prompt
+          input = nil
+          while input != "exit"
+            input = gets.to_i - 1
+            all_sorted = PortCo.all.sort_by {|company| company.company_name}
+            puts "#{all_sorted[input].company_name}"
+            puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
+          end
         when "4"
           puts "All industry classifications" #this needs work!
           input_prompt
