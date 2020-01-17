@@ -12,20 +12,16 @@ class VistaCompanies::CLI
       case input
         when "1"
           display_all_current
-          puts "Please enter the company number for more information."
-          puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
+          input_prompt
         when "2"
           display_all_former
-          puts "Please enter the company number for more information."
-          puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
+          input_prompt
         when "3"
           display_all_comps
-          puts "Please enter the company number for more information."
-          puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
+          input_prompt
         when "4"
-          puts "All industry classifications"
-          puts "Please enter the industry number for a related list of portfolio companies."
-          puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
+          puts "All industry classifications" #this needs work!
+          input_prompt
         when "list"
           list
         when "exit"
@@ -38,8 +34,8 @@ class VistaCompanies::CLI
 
   def greeting
     puts "Welcome to the private equity fund portfolio company scraper."
-    puts "This program allows users to navigate Vista Equity Partners' current and former investments."
-    puts "Please wait while the program scrapes Vista's webpage...\n\n"
+    puts "This program lets users navigate Vista Equity Partners' portfolio of current and former investments."
+    puts "Please wait while the program scrapes Vista's current webpage...\n\n"
   end
 
   def list
@@ -52,6 +48,11 @@ class VistaCompanies::CLI
 
   def goodbye
     puts "Goodbye."
+  end
+
+  def input_prompt
+    puts "Please enter the company number for more information."
+    puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
   end
 
   def make_companies
