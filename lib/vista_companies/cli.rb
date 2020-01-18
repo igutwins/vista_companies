@@ -74,18 +74,6 @@ class VistaCompanies::CLI
     end
   end
 
-#  def display_all_companies
-#    PortCo.all.each do |company|
-#      puts "#{company.company_name.upcase}".colorize(:red)
-#      puts "  Year of Investment:".colorize(:light_blue) + " #{company.year_of_investment}"
-#      puts "  Portfolio Status:".colorize(:light_blue) + " #{company.portfolio_status}"
-#      puts "  Headquarters:".colorize(:light_blue) + " #{company.headquarters}"
-#      puts "  Website:".colorize(:light_blue) + " #{company.company_site}"
-#      puts "  Description:".colorize(:light_blue) + " #{company.brief_desc}"
-#      puts "----------------------".colorize(:green)
-#    end
-#  end
-
   def display_all_current
     all_current = PortCo.all.select {|company| company.portfolio_status == "Current"}
     sorted = all_current.sort_by {|company| company.company_name}
@@ -112,5 +100,17 @@ class VistaCompanies::CLI
     end
     puts
   end
+
+  def display_selected_company(user_input)
+      selected = PortCo.all[input-1]
+      puts "#{selected.company_name.upcase}".colorize(:red)
+      puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"
+      puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
+      puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "----------------------".colorize(:green)
+end
 
 end
