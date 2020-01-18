@@ -8,11 +8,13 @@ class VistaCompanies::CLI
     input = nil
     while input != "exit"
       puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
-    input = gets.strip.downcase
+      input = gets.strip.downcase
       case input
       when "1" #lists current
           display_all_current
           input_prompt
+          user_input = gets.to_i
+          display_selected_company(user_input)
           when "2" #lists former
           display_all_former
           input_prompt
@@ -102,7 +104,7 @@ class VistaCompanies::CLI
   end
 
   def display_selected_company(user_input)
-      selected = PortCo.all[input-1]
+      selected = PortCo.all[user_input-1]
       puts "#{selected.company_name.upcase}".colorize(:red)
       puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"
       puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
@@ -111,6 +113,5 @@ class VistaCompanies::CLI
       puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
       puts "----------------------".colorize(:green)
-end
-
+    end
 end
