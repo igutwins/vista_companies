@@ -10,24 +10,21 @@ class VistaCompanies::CLI
       puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
       input = gets.strip.downcase
       case input
-      when "1" #lists current
+        when "1" #lists current
           display_all_current
           input_prompt
           user_input = gets.to_i
-          display_selected_company(user_input)
-          when "2" #lists former
+          display_selected_current_company(user_input)
+        when "2" #lists former
           display_all_former
           input_prompt
+          user_input = gets.to_i
+          display_selected_former_company(user_input)
         when "3" #lists all
           display_all_comps
           input_prompt
-          input = nil
-          while input != "exit"
-            input = gets.to_i - 1
-            all_sorted = PortCo.all.sort_by {|company| company.company_name}
-            puts "#{all_sorted[input].company_name}"
-            puts "Type 'list' to repeat the list of options or type 'exit' to leave the program."
-          end
+          user_input = gets.to_i
+          display_selected_company(user_input)
         when "4"
           puts "All industry classifications" #this needs work!
           input_prompt
@@ -77,8 +74,8 @@ class VistaCompanies::CLI
   end
 
   def display_all_current
-    all_current = PortCo.all.select {|company| company.portfolio_status == "Current"}
-    sorted = all_current.sort_by {|company| company.company_name}
+    current = PortCo.all_current
+    sorted = current.sort_by {|company| company.company_name}
     sorted.each_with_index do |company, index|
       puts "##{index+1}. #{company.company_name.upcase}".colorize(:red)
     end
@@ -86,8 +83,8 @@ class VistaCompanies::CLI
   end
 
   def display_all_former
-    all_former = PortCo.all.select {|company| company.portfolio_status == "Former"}
-    sorted = all_former.sort_by {|company| company.company_name}
+    former = PortCo.all_former
+    sorted = former.sort_by {|company| company.company_name}
     sorted.each_with_index do |company, index|
       puts "##{index+1}. #{company.company_name.upcase}".colorize(:red)
     end
@@ -103,8 +100,9 @@ class VistaCompanies::CLI
     puts
   end
 
-  def display_selected_company(user_input)
-      selected = PortCo.all[user_input-1]
+  def display_selected_current_company(user_input)
+      input = user_input
+      selected = PortCo.all_current[input]
       puts "#{selected.company_name.upcase}".colorize(:red)
       puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"
       puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
@@ -113,5 +111,32 @@ class VistaCompanies::CLI
       puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
       puts "----------------------".colorize(:green)
-    end
+  end
+
+  def display_selected_former_company(user_input)
+      input = user_input - 1
+      selected = PortCo.all_former[input]
+      puts "#{selected.company_name.upcase}".colorize(:red)
+      puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"
+      puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
+      puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "----------------------".colorize(:green)
+  end
+
+  def display_selected_company(user_input)
+      input = user_input - 1
+      selected = PortCo.all[input]
+      puts "#{selected.company_name.upcase}".colorize(:red)
+      puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"
+      puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
+      puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
+      puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "----------------------".colorize(:green)
+  end
+
 end
