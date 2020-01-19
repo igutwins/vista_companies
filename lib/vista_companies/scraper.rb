@@ -10,7 +10,7 @@ class Scraper
         company_site = card.attribute("href")
         company_name = card.css("div.table-cell img").attribute('alt').text.gsub(" Logo","")
         industry = card[:class].split(" ").detect { |x| x.include?("industry")}
-        industry_clean = industry.gsub("industry-","").gsub("-"," ").capitalize
+        industry_clean = Industry.new(industry.gsub("industry-","").gsub("-"," ").capitalize)
         companies << {link_detail: company_site, company_name: company_name, industry: industry_clean}
       end
     end
