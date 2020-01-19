@@ -1,6 +1,5 @@
 class Industry
 attr_accessor :ind_name
-attr_reader :portcos
 
 @@all = []
 
