@@ -4,3 +4,4 @@ require 'nokogiri'
 require 'colorize'
 
 VistaCompanies::CLI.new.call
+binding.pry
