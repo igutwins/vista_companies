@@ -108,7 +108,7 @@ class VistaCompanies::CLI
       puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
       puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
-      puts "  Industry:".colorize(:light_blue) + " #{selected.industry}"
+      puts "  Industry:".colorize(:light_blue) + " #{selected.industry.ind_name}"
       puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
       puts "----------------------".colorize(:green)
@@ -122,6 +122,7 @@ class VistaCompanies::CLI
       puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
       puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "  Industry:".colorize(:light_blue) + " #{selected.industry.ind_name}"
       puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
       puts "----------------------".colorize(:green)
@@ -135,6 +136,7 @@ class VistaCompanies::CLI
       puts "  Portfolio Status:".colorize(:light_blue) + " #{selected.portfolio_status}"
       puts "  Headquarters:".colorize(:light_blue) + " #{selected.headquarters}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
+      puts "  Industry:".colorize(:light_blue) + " #{selected.industry.ind_name}"
       puts "  Description:".colorize(:light_blue) + " #{selected.brief_desc}"
       puts "  Website:".colorize(:light_blue) + " #{selected.company_site}"
       puts "----------------------".colorize(:green)
