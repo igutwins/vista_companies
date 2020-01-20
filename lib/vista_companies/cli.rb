@@ -4,6 +4,7 @@ class VistaCompanies::CLI
     greeting
     make_companies
     add_company_attributes
+    sort_to_industry
     list
     input = nil
     while input != "exit"
@@ -26,20 +27,26 @@ class VistaCompanies::CLI
           user_input = gets.to_i
           display_selected_company(user_input)
         when "4"
-          puts "All industry classifications" #this needs work!
+          puts "\n\n"
+          display_all_industries
           input_prompt
+          user_input = gets.to_i
+          display_selected_company(user_input)
+          puts "\n\n"
         when "list"
           list
         when "exit"
           goodbye
         else
-          puts "Invalid entry. Type 'list' to repeat the list of options or type 'exit' to leave the program."
+          puts "Invalid entry. Type 'list' to repeat the list of options or type 'exit' to leave the program.\n\n"
         end
       end
     end
 
   def greeting
+    puts "\n"
     puts "Welcome to the private equity fund portfolio company scraper."
+    puts "\n"
     puts "This program lets users navigate Vista Equity Partners' portfolio of current and former investments."
     puts "Please wait while the program scrapes Vista's current webpage...\n\n"
   end
@@ -53,12 +60,13 @@ class VistaCompanies::CLI
   end
 
   def goodbye
+    puts "\n\n"
     puts "Goodbye."
   end
 
   def input_prompt
     puts "Please enter the company number for more information."
-    puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program."
+    puts "Or type 'list' to repeat the list of options or type 'exit' to leave the program.\n\n"
   end
 
   def make_companies
@@ -73,9 +81,16 @@ class VistaCompanies::CLI
     end
   end
 
+  def sort_to_industry
+    PortCo.all.each do |company|
+      industry = company.industry
+      industry.portcos << company
+    end
+  end
+
   def display_all_current
     current = PortCo.all_current
-    sorted = current.sort_by {|company| company.company_name}
+    sorted = current.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}
     sorted.each_with_index do |company, index|
       puts "##{index+1}. #{company.company_name.upcase}".colorize(:red)
     end
@@ -84,7 +99,7 @@ class VistaCompanies::CLI
 
   def display_all_former
     former = PortCo.all_former
-    sorted = former.sort_by {|company| company.company_name}
+    sorted = former.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}
     sorted.each_with_index do |company, index|
       puts "##{index+1}. #{company.company_name.upcase}".colorize(:red)
     end
@@ -93,15 +108,24 @@ class VistaCompanies::CLI
 
   def display_all_comps
     all_comps = PortCo.all
-    sorted = all_comps.sort_by {|company| company.company_name}
+    sorted = all_comps.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}
     sorted.each_with_index do |company, index|
       puts "##{index+1}. #{company.company_name.upcase}".colorize(:red)
     end
     puts
   end
 
+  def display_all_industries
+    all_industries = Industry.all
+    sorted = all_industries.sort_by {|industry| industry.ind_name.downcase}
+    sorted.each_with_index do |industry, index|
+      puts "##{index+1}. #{industry.ind_name.upcase}".colorize(:red)
+    end
+    puts
+  end
+
   def display_selected_current_company(user_input)
-      input = user_input
+      input = user_input - 1
       selected = PortCo.all_current[input]
       puts "#{selected.company_name.upcase}".colorize(:red)
       puts "  Year of Investment:".colorize(:light_blue) + " #{selected.year_of_investment}"

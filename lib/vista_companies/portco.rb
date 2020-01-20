@@ -15,7 +15,7 @@ class PortCo
 
   def self.create_from_all_companies_page(companies_array)
     companies_array.each do |company_hash|
-      PortCo.new(company_hash)
+      newco = PortCo.new(company_hash)
     end
   end
 
