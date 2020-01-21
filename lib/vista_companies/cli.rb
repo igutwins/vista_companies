@@ -142,7 +142,7 @@ class VistaCompanies::CLI
 
   def display_selected_current_company(user_input)
       input = user_input - 1
-      selected = PortCo.all_current[input]
+      selected = PortCo.all_current.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}[input]
       puts "\n"
       puts "----------------------".colorize(:green)
       puts "#{selected.company_name.upcase}".colorize(:red)
@@ -159,7 +159,7 @@ class VistaCompanies::CLI
 
   def display_selected_former_company(user_input)
       input = user_input - 1
-      selected = PortCo.all_former[input]
+      selected = PortCo.all_former.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}[input]
       puts "\n"
       puts "----------------------".colorize(:green)
       puts "#{selected.company_name.upcase}".colorize(:red)
@@ -176,7 +176,7 @@ class VistaCompanies::CLI
 
   def display_selected_company(user_input)
       input = user_input - 1
-      selected = PortCo.all[input]
+      selected = PortCo.all.sort {|a,b| a.company_name.downcase <=> b.company_name.downcase}[input]
       puts "\n"
       puts "----------------------".colorize(:green)
       puts "#{selected.company_name.upcase}".colorize(:red)
