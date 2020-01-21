@@ -1,4 +1,3 @@
-#CLI Controller
 class VistaCompanies::CLI
   def call
     greeting
@@ -31,7 +30,6 @@ class VistaCompanies::CLI
           input_prompt_industry
           user_input = gets.to_i
           display_selected_industry(user_input)
-          #display_selected_company(user_input)
           puts "\n\n"
         when "list"
           list
@@ -207,5 +205,4 @@ class VistaCompanies::CLI
       end
       puts "----------------------".colorize(:green)
   end
-
 end

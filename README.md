@@ -1,5 +1,4 @@
-Private Equity Portfolio Company Scraper Tool
-For Vista Private Equity's Portfolio
+## Project Title: Private Equity Portfolio Company Scraper Tool for Vista Private Equity's Portfolio
 
 ## Usage Instructions
 

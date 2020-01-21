@@ -1,5 +1,4 @@
 class PortCo
-
   attr_accessor :link_detail, :industry, :company_name, :year_of_investment, :portfolio_status, :headquarters, :company_site, :brief_desc, :detail_desc
 
   @@all = []
@@ -15,7 +14,7 @@ class PortCo
 
   def self.create_from_all_companies_page(companies_array)
     companies_array.each do |company_hash|
-      newco = PortCo.new(company_hash)
+      PortCo.new(company_hash)
     end
   end
 
@@ -39,5 +38,4 @@ class PortCo
   def self.all_former
     @@all_former
   end
-
 end
